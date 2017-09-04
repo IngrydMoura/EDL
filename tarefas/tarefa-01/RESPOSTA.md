@@ -8,10 +8,11 @@ Sou estudante da UERJ e curso Ciência da Computação e estou atualmente no 5º
 - HTML5
 - C
 - C++
+- C#
 - Python
 
 **Linguagens que preciso conhecer:**
-- C#
+- Ruby
 - PHP
 - Java
 - .NET
