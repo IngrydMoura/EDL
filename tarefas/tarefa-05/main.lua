@@ -12,10 +12,7 @@ player = {
 -- Nome: variável "x" e "y"
 -- Propriedade: valor
 -- Binding time: compilação
--- Explicação: as coordenadas do player são amarradas em tempo de compilação. 
--- A posição inicial ja é dada pelo programador, logo depois da compilação seu valor é setado no mesmo instante.
--- Porém, a variável y sofre mudanças no seu valor durante a execução do jogo.
-
+-- Explicação:  dado que "x" e "y" são variaveis globais de uma função, seu endereço só pode ser determinado em tempo de compilação.
 ---------------------------
 obstTemp = 10 
 gravity = 100
@@ -25,15 +22,6 @@ cont = 0
 gameover = false
 
 
----------------- TAREFA-05
-
---Nome: variável "gravity"
---Propriedade: valor
---Binding Time: compilação
---Explicação: seu valor é dado pelo programador porém durante a execução seu valor é alterado de acordo com as instruções dadas.
-
-------------------------------
-
 function love.load()
    fundo = love.graphics.newImage("fundo.jpg")
    player.img = love.graphics.newImage("cat1.png")  
@@ -42,11 +30,11 @@ function love.load()
 end
  
 ---------------- TAREFA-05
-
 --Nome: variavel "fundo"
 --Propriedade: endereço 
 --Binding Time: execução
 --Explicação: dado que "fundo" é uma variavel local de uma função, seu endereço só pode ser determinado em tempo de execução.
+
 
 --------------------------------
 
@@ -130,17 +118,29 @@ end
 
 
 ----------------- TAREFA 05
--- Nome: variáveis "x1", "x2", "y1", "y2", "h1", "h2", "w1", e "w2"
--- Propriedade: endereço
+-- Nome: variável "obstacle.x"
+-- Propriedade: valor
 -- Binding time: execução
--- Explicação: por serem coordenadas das imagens e serem variáveis locais, seu endereço é determinado em tempo de execução.
-
-
+-- Explicação: Esta variável tem seu valor definido pelo comando do usuario, ou seja de acordo com a interaçao usuário-computador.Logo, o valor é atribuído durante a execução do programa.
 
 -- Nome: função "CheckColision()"
--- Propriedade: implementação da função
+-- Propriedade: implementação
+-- Binding time: compilação
+-- Explicação: Esta função tem o mesmo nome sendo utilizado por todo o código e foi não foi criada dentro de nenhuma outra função.
+-- Logo, seu bind time é em tempo de compilação pois sua implementação para a função "CheckColision()" ocorre quando o programa é compilado.
+
+-- Nome: símbolo "+"
+-- Propriedade: semântica
 -- Binding time: design
--- Explicação: por ser uma função em lua, seu bind time é em tempo de design. 
+-- Explicação: O operador "+" significa adição entre dois valores. É atribuida a uma variável a semantica da operação no bind time de design.
+-- Pois o simbolo "+" possui a mesma semantica para "+" que é definida pela linguagem Lua enquanto ocorre o design.
+
+
+-- Nome: variável "love.math.random"
+-- Propriedade: valor
+-- Binding time: design
+-- Explicação: A variável "love.math.random" é da biblioteca de matemática do Lua, e é parecida com uma tabela
+-- externa, com seus valores sendo definidos no bind time de design da biblioteca.
 
 ----------------------------
  
@@ -169,10 +169,3 @@ function love.draw()
 	end
 
 end
-
------------------ TAREFA 05
--- Nome: variavel "gameover"
--- Propriedade: tamanho ocupado em memória por variável tipo boolean
--- Binding time: design
--- Explicação: por se tratar do tamanho de um tipo de variável, seu bind é feito no tempo de concepção da linguagem.
--------------------------
