@@ -1,5 +1,12 @@
 
+--------------------- tarefa-06
+-- Nome da variável: obstaculos 
+-- Tipo de dado: array
 obstaculos = {}
+
+--------------------- tarefa-06
+-- Nome da variável: player 
+-- Tipo de dado: registro 
 player = { 
 	x = 100, 
 	y = 640,
@@ -8,50 +15,38 @@ player = {
 	
 }
 
----------------- TAREFA-05
--- Nome: variável "x" e "y"
--- Propriedade: valor
--- Binding time: compilação
--- Explicação: as coordenadas do player são amarradas em tempo de compilação. 
--- A posição inicial ja é dada pelo programador, logo depois da compilação seu valor é setado no mesmo instante.
--- Porém, a variável y sofre mudanças no seu valor durante a execução do jogo.
-
----------------------------
 obstTemp = 10 
 gravity = 100
 aceleracao = 16
 gravid = 200 
 cont = 0
+
+font = (40,50)
+
 gameover = false
 
 
----------------- TAREFA-05
+function love.load()	
+	fundo = love.graphics.newImage('fundo.jpg')	
+   player.img = love.graphics.newImage("cat1.png") 
 
---Nome: variável "gravity"
---Propriedade: valor
---Binding Time: compilação
---Explicação: seu valor é dado pelo programador porém durante a execução seu valor é alterado de acordo com as instruções dadas.
-
-------------------------------
-
-function love.load()
-   fundo = love.graphics.newImage("fundo.jpg")
-   player.img = love.graphics.newImage("cat1.png")  
-   font = love.graphics.newFont(40)
-
+   if cont<4 then
+   font = love.graphics.newFont(font[0])
+	else
+   font = love.graphics.newFont(font[1])
+	end
 end
  
----------------- TAREFA-05
 
---Nome: variavel "fundo"
---Propriedade: endereço 
---Binding Time: execução
---Explicação: dado que "fundo" é uma variavel local de uma função, seu endereço só pode ser determinado em tempo de execução.
-
---------------------------------
 
 function love.update(dt)
    -- Sair do jogo --
+
+
+	--------------------- tarefa-06
+	-- Nome da variável: love.keyboard 
+	-- Tipo de dado: enumeração
+
    if love.keyboard.isDown('escape') then
 	love.event.push('quit')
    end   
@@ -92,6 +87,11 @@ function love.update(dt)
  
 			newObstacle= { x = 650, y = 650, width = 25, height = 50, counted = false}
 			table.insert(obstaculos, newObstacle)
+
+			--------------------- tarefa-06
+			-- Nome da variável: table 
+			-- Tipo de dado: dicionário
+
 		end
 		
 		
@@ -129,21 +129,6 @@ function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
 end
 
 
------------------ TAREFA 05
--- Nome: variáveis "x1", "x2", "y1", "y2", "h1", "h2", "w1", e "w2"
--- Propriedade: endereço
--- Binding time: execução
--- Explicação: por serem coordenadas das imagens e serem variáveis locais, seu endereço é determinado em tempo de execução.
-
-
-
--- Nome: função "CheckColision()"
--- Propriedade: implementação da função
--- Binding time: design
--- Explicação: por ser uma função em lua, seu bind time é em tempo de design. 
-
-----------------------------
- 
 function love.draw()
 	
 	--fundo--
@@ -164,15 +149,13 @@ function love.draw()
    	end
  
     -- Obstaculos ---
-	for i, obstacle in ipairs(obstaculos) do	  
-	  love.graphics.rectangle('fill', obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+	for i, obstacle in ipairs(obstaculos) do
+		if cont<4 then  
+	  		love.graphics.circle("fill", obstacle.x, obstacle.y, 20)
+	  	else 
+	  		love.graphics.rectangle("fill", obstacle.x, obstacle.y, obstacle.width, obstacle.height)	  		
+	  	end 
 	end
 
-end
 
------------------ TAREFA 05
--- Nome: variavel "gameover"
--- Propriedade: tamanho ocupado em memória por variável tipo boolean
--- Binding time: design
--- Explicação: por se tratar do tamanho de um tipo de variável, seu bind é feito no tempo de concepção da linguagem.
--------------------------
+end
