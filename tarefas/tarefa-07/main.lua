@@ -4,6 +4,7 @@
 -- Tipo de dado: array
 obstaculos = {}
 
+
 --------------------- tarefa-06
 -- Nome da variável: player 
 -- Tipo de dado: registro 
@@ -24,7 +25,6 @@ cont = 0
 font = (40,50)
 
 gameover = false
-
 
 
 function love.load()	
@@ -87,7 +87,17 @@ function love.update(dt)
 			obstTemp = love.math.random(200,700)
  
 			newObstacle= { x = 650, y = 650, width = 25, height = 50, counted = false}
-			table.insert(obstaculos, newObstacle)
+			table.insert(obstaculos, newObstacle)			
+
+			------------------ tarefa-07
+			-- Coleção dinâmica de objetos
+			-- O array obstaculos é uma varíavel global que ira conter todos os objetos da coleção.
+			-- Escopo:global, ou seja, pode ser acessado em qualquer parte do programa
+			-- Tempo de vida:Essa varíavel está desde o início da primeira partida do jogo,
+			-- e todos os seus objetos serão apagados a cada vez que for iniciado uma nova partida.
+			-- Alocação: No ínicio do jogo
+			-- Desalocação:No encerramento do jogo
+					
 
 			--------------------- tarefa-06
 			-- Nome da variável: table 
@@ -102,20 +112,28 @@ function love.update(dt)
 			if obstacle.x < 0 then
 				table.remove(obstacle, i)
 			end
+			------------------ tarefa-07
+			--Parte do código responsável pela remoção dos objetos da coleção.
+			--Cada objeto recebe um temporizador random com valor entre 200 e 700.
+			-- Para cada obstaculo pulado a variável cont acrescenta mais 1.
+			-- Ao colidir com o obstaculo, o obstaculo é removido do array e do jogo.
 			
 			
 			if obstacle.counted == false and obstacle.x < player.x then
 				obstacle.counted = true
 				cont = cont + 1
-				
-			end			
- 
+			
+			end 
 		end
  
 		-- Colisões --
 		for i, obstacle in ipairs(obstaculos) do
 			if CheckCollision(player.x,player.y,player.img:getWidth(),player.img:getHeight(),obstacle.x,obstacle.y,obstacle.width,obstacle.height) then
-				gameover = true			
+				gameover = true				
+					
+				----------------- tarefa-07
+				-- Parte do código que checa se o jogador colidiu com algum objeto da coleção.
+				-- Caso a função CheckCollision retorne verdadeiro para algum elemento o jogo acaba.
 			end
 		end
 	end
