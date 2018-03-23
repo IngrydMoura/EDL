@@ -32,29 +32,53 @@ function love.load()
 end
 
 -----------------------------Tarefa-08 
---Corrotina para movimentar o novo objeto retangular
-function new (x,y,vx)
-    local me; me = {
-        move = function (dx,dy)
-             x = x + dx
-             y = y + dy
-             return x, y
-        end,
-        get = function ()
-             return x, y
-        end,
-        co = coroutine.create(function (dt)
-            while true do
-                me.move( vx*dt, 0)
-                dt = coroutine.yield()
-            end
-        end),
-    }
-    return me
+--Cria o novo objeto retangular
+
+
+function new(x, y, v)
+  local me; me = {
+    move = function(dx, dy)
+      x = x + dx
+      y = y + dy
+      return x, y
+    end,
+
+    get = function()
+      return x, y
+    end,
+
+    -- Tarefa 08 - Co-rotina que faz o retangulo se movimentar de forma retangular
+    co = coroutine.create(function(dt)
+      while true do
+        for i = 1, 50 do
+          me.move(0, 2*v*dt)
+          dt = coroutine.yield()
+        end
+
+        for i = 1, 50 do
+          me.move(-v*dt, 0)
+          dt = coroutine.yield()
+        end
+
+        for i = 1, 50 do
+          me.move(0, -v/2*dt)
+          dt = coroutine.yield()
+        end
+
+        for i = 1, 50 do
+          me.move(v*dt, 0)
+          dt = coroutine.yield()
+        end
+      end
+    end),    
+   
+  }
+  return me
 end
 
-local o1 = new(0,  290,  100)
 
+
+local o1 = new(100, 100, 100)
 
 function love.update(dt)
    -- Sair do jogo --
@@ -192,7 +216,7 @@ function love.draw()
  	------------------------------Tarefa-08
  	--desenha o novo retangulo
  	local x,y = o1.get()
-    love.graphics.rectangle('fill', x,y, 20,20)
+    love.graphics.rectangle('fill', x,y, 10,10)
 
     -- Obstaculos ---
 	for i, obstacle in ipairs(obstaculos) do		  
