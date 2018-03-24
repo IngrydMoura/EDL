@@ -1,5 +1,4 @@
-
---------------------- tarefa-06
+-------------------- tarefa-06
 -- Nome da variável: obstaculos 
 -- Tipo de dado: array
 obstaculos = {}
@@ -37,6 +36,11 @@ end
 
 function new(x, y, v)
   local me; me = {
+
+	size = function()
+		return 10,10
+	end,
+	
     move = function(dx, dy)
       x = x + dx
       y = y + dy
@@ -125,7 +129,7 @@ function love.update(dt)
 		
 		obstTemp = obstTemp - 10
 		if obstTemp <= 0 then
-			obstTemp = love.math.random(200,700)
+			obstTemp = love.math.random(500,700)
  
 			newObstacle= { x = 650, y = 650, width = 25, height = 50, counted = false}
 			table.insert(obstaculos, newObstacle)			
@@ -178,6 +182,14 @@ function love.update(dt)
 				-- Caso a função CheckCollision retorne verdadeiro para algum elemento o jogo acaba.
 			end
 		end
+
+		-- tarefa-8 - Colisão do player com o novo objeto o1 --
+			o1x,o1y = o1.get()
+			o1height,o1width = o1.size()
+			if CheckCollision(player.x,player.y,player.img:getWidth(),player.img:getHeight(),o1x,o1y,o1width,o1height) then
+				gameover = true			
+			end
+		
 	end
 
 	-----------------Tarefa-08 
